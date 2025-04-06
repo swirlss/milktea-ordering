@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Head content remains the same -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mark's Boba Bonanza</title>
+    <title>BOBA ROYALE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* All styles remain the same */
         /* Reset and base styles */
         * {
             margin: 0;
@@ -29,10 +27,56 @@
             background: linear-gradient(135deg, #8d6e63, #a1887f);
             color: white;
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 0;
             box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
+        }
+        
+        /* New header design with decorative elements */
+        .header-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .tea-splash {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: splash 8s infinite;
+        }
+        
+        .tea-pearl {
+            position: absolute;
+            background-color: rgba(62, 39, 35, 0.5);
+            border-radius: 50%;
+            animation: float-pearl 10s infinite ease-in-out;
+        }
+        
+        @keyframes splash {
+            0% { transform: scale(0); opacity: 0.7; }
+            50% { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        @keyframes float-pearl {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+        
+        /* New header text animation */
+        .header-text-container {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            display: inline-block;
         }
         
         .logo {
@@ -41,6 +85,8 @@
             margin-bottom: 0.5rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             animation: fadeIn 1s ease-in-out;
+            position: relative;
+            display: inline-block;
         }
         
         .tagline {
@@ -48,6 +94,68 @@
             font-size: 1.3rem;
             opacity: 0.9;
             margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* Bubble animation for header text */
+        .logo:hover .bubble-animation,
+        .tagline:hover .bubble-animation {
+            opacity: 1;
+        }
+        
+        .bubble-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .text-bubble {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            width: 8px;
+            height: 8px;
+            animation: rise-bubble 2s ease-in infinite;
+            opacity: 0;
+        }
+        
+        @keyframes rise-bubble {
+            0% { 
+                transform: translateY(100%) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(-20px) translateX(var(--x-move));
+                opacity: 0;
+            }
+        }
+        
+        /* 3D text effect on hover */
+        .logo, .tagline {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .logo:hover {
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            transform: translateY(-5px) rotateX(10deg);
+        }
+        
+        .tagline:hover {
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px) rotateX(5deg);
+            letter-spacing: 1px;
         }
         
         .header-bubbles {
@@ -75,6 +183,32 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* New header text positioning and hover effect */
+        .logo-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tagline {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -30px;
+            font-style: italic;
+            font-size: 1.3rem;
+            opacity: 0;
+            margin-bottom: 0;
+            transition: all 0.4s ease;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .logo-container:hover .tagline {
+            opacity: 0.9;
+            bottom: -40px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
         /* Container styles */
@@ -126,6 +260,7 @@
             overflow: hidden;
             transition: all 0.3s ease;
             position: relative;
+            transition-delay: calc(var(--item-index, 0) * 0.1s);
         }
         
         .menu-item:hover {
@@ -266,6 +401,7 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             height: 400px;
+            width: 400px;
             background-size: cover;
             background-position: center;
         }
@@ -793,21 +929,348 @@
                 grid-column: span 1;
             }
         }
+
+        /* NEW VISUAL EFFECTS CSS */
+        /* Parallax scrolling effect */
+        .parallax-section {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition: background-position 0.5s ease;
+        }
+
+        /* Animated background gradient */
+        .animated-gradient {
+            background: linear-gradient(-45deg, #8d6e63, #a1887f, #5d4037, #3e2723);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glowing effect for buttons */
+        .glow-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow-effect::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .glow-effect:hover::after {
+            opacity: 0.3;
+            transform: scale(1);
+        }
+
+        /* Floating animation for elements */
+        .float-animation {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Ripple effect for buttons */
+        .ripple-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple-effect::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.7) 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+
+        .ripple-effect:active::after {
+            transform: scale(0, 0);
+            opacity: 0.3;
+            transition: 0s;
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Text reveal animation */
+        .animate-text span {
+            display: inline-block;
+        }
+
+        /* Different reveal directions */
+        .reveal-left {
+            transform: translateX(-50px);
+        }
+
+        .reveal-right {
+            transform: translateX(50px);
+        }
+
+        .reveal-up {
+            transform: translateY(50px);
+        }
+
+        .reveal-down {
+            transform: translateY(-50px);
+        }
+
+        .reveal-left.animated,
+        .reveal-right.animated,
+        .reveal-up.animated,
+        .reveal-down.animated {
+            transform: translate(0);
+        }
+
+        /* Zoom reveal */
+        .reveal-zoom {
+            transform: scale(0.8);
+        }
+
+        .reveal-zoom.animated {
+            transform: scale(1);
+        }
+
+        /* Order confirmation animation */
+        .order-confirmation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        .order-confirmation.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .confirmation-content {
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+            transform: scale(0.8);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .order-confirmation.show .confirmation-content {
+            transform: scale(1);
+        }
+
+        .confirmation-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            position: relative;
+            animation: pulse-green 2s infinite;
+        }
+
+        .confirmation-icon i {
+            color: white;
+            font-size: 40px;
+        }
+
+        .confirmation-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #5d4037;
+        }
+
+        .confirmation-message {
+            font-size: 16px;
+            color: #7d6e63;
+            margin-bottom: 30px;
+        }
+
+        .confirmation-button {
+            background-color: #8d6e63;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(141, 110, 99, 0.3);
+        }
+
+        .confirmation-button:hover {
+            background-color: #6d4c41;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(141, 110, 99, 0.4);
+        }
+
+        /* Boba Pearl Animation */
+        .boba-pearl {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #3e2723;
+            border-radius: 50%;
+            opacity: 0;
+            animation: boba-fall 3s ease-in-out forwards;
+            z-index: 1;
+        }
+
+        @keyframes boba-fall {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 1;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(400px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulse-green {
+            0% {
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(76, 175, 80, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+            }
+        }
+
+        /* Click animation - popping pearl effect */
+        .click-pearl {
+            position: absolute;
+            background-color: #3e2723;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 9000;
+            pointer-events: none;
+            animation: pearl-pop 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        .click-pearl::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(62, 39, 35, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pearl-ripple 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        @keyframes pearl-pop {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pearl-ripple {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(3);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Header Section -->
-    <header>
+    <header class="animated-gradient">
+        <div class="header-decoration" id="headerDecoration">
+            <!-- Decorative elements will be added dynamically -->
+        </div>
         <div class="header-bubbles">
             <!-- Bubbles will be added dynamically with JavaScript -->
         </div>
-        <div class="logo">Mark's Boba Bonanza</div>
-        <div class="tagline">Premium Milk Tea Experience</div>
+        <div class="header-text-container">
+            <div class="logo-container">
+                <div class="logo">
+                    BOBA ROYALE
+                    <div class="bubble-animation" id="logoBubbles"></div>
+                </div>
+                <div class="tagline">
+                    Premium Milk Tea Experience
+                    <div class="bubble-animation" id="taglineBubbles"></div>
+                </div>
+            </div>
+        </div>
     </header>
     
     <!-- Shopping Cart Icon -->
     <div class="cart-icon-container" id="cartIcon">
-        <div class="cart-icon">
+        <div class="cart-icon ripple-effect">
             <i class="fas fa-shopping-cart"></i>
         </div>
         <div class="cart-count" id="cartCount">0</div>
@@ -834,7 +1297,7 @@
                 <span>Total:</span>
                 <span id="cartTotal">₱0.00</span>
             </div>
-            <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+            <button class="checkout-btn ripple-effect glow-effect" id="checkoutBtn">Proceed to Checkout</button>
         </div>
     </div>
     
@@ -905,7 +1368,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <button type="submit" class="place-order-btn">
+                        <button type="submit" class="place-order-btn ripple-effect glow-effect">
                             <i class="fas fa-check-circle"></i> Place Order
                         </button>
                     </div>
@@ -917,101 +1380,227 @@
     <!-- Main Content -->
     <div class="container">
         <!-- About Section -->
-        <section id="about" class="about-section fade-in">
-            <div class="about-content">
-                <h3>Our Story</h3>
-                <p>Founded in 2025, Mark's Boba Bonanza was born from a passion for authentic Taiwanese milk tea. Our founder, Mark, brought her family's secret recipes from Taipei to share with the world.</p>
+        <section id="about" class="about-section fade-in parallax-section animate-on-scroll">
+            <div class="about-content reveal-left animate-on-scroll">
+                <h3 class="animate-text animate-on-scroll">Our Story</h3>
+                <p>Founded in 2025, BOBA ROYALE was born from a passion for authentic Taiwanese milk tea. Our founder, Mark, brought her family's secret recipes from Taipei to share with the world.</p>
                 <p>We source only the finest tea leaves and ingredients, ensuring every cup delivers the perfect balance of flavor, aroma, and texture that milk tea lovers crave.</p>
-                <p>Mark's Boba Bonanza, we believe in the art of tea-making and the joy it brings to people's lives. Every sip is crafted with care and tradition.</p>
+                <p>BOBA ROYALE, we believe in the art of tea-making and the joy it brings to people's lives. Every sip is crafted with care and tradition.</p>
             </div>
-            <div class="about-image" style="background-image: url('speed.png')"></div>
+            <div class="about-image float-animation reveal-right animate-on-scroll" style="background-image: url('BR-Logo.png')"></div>
         </section>
         
         <!-- Menu Section -->
-        <section id="menu" class="slide-up">
-            <h2>Our Milk Tea Menu</h2>
+        <section id="menu" class="slide-up animate-on-scroll">
+            <h2 class="animate-text animate-on-scroll">MENU</h2>
             <p style="text-align: center; margin-bottom: 2rem; color: #7d6e63;">Discover our signature drinks crafted with premium ingredients</p>
             <div class="menu-container">
                 <!-- Menu Item 1 -->
-                <div class="menu-item">
-                    <div class="menu-item-image" style="background-image: url('classic-milk-tea.png')">
+                <div class="menu-item tilt-effect animate-on-scroll">
+                    <div class="menu-item-image fade-in-image" style="background-image: url('classic-milk-tea.jpg')">
                         <div class="menu-item-name">Classic Milk Tea</div>
                     </div>
                     <div class="menu-item-details">
                         <div class="menu-item-description">Our signature milk tea with a perfect blend of premium black tea and creamy milk. A timeless favorite that never disappoints.</div>
                         <div class="menu-item-price">
                             ₱150
-                            <button class="add-to-cart" data-id="1" data-name="Classic Milk Tea" data-price="150" data-image="classic-milk-tea.png">Add to Order</button>
+                            <button class="add-to-cart ripple-effect glow-effect" data-id="1" data-name="Classic Milk Tea" data-price="150" data-image="classic-milk-tea.jpg">Add to Order</button>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Menu Item 2 -->
-                <div class="menu-item">
-                    <div class="menu-item-image" style="background-image: url('taro-milktea.png')">
+                <div class="menu-item tilt-effect animate-on-scroll">
+                    <div class="menu-item-image fade-in-image" style="background-image: url('taro-milktea.png')">
                         <div class="menu-item-name">Taro Milk Tea</div>
                     </div>
                     <div class="menu-item-details">
                         <div class="menu-item-description">Creamy taro flavor blended with our premium milk tea base. Naturally sweet with a beautiful purple hue.</div>
                         <div class="menu-item-price">
                             ₱150
-                            <button class="add-to-cart" data-id="2" data-name="Taro Milk Tea" data-price="150.00" data-image="https://images.unsplash.com/photo-1561027191-7a9630a6d5e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80">Add to Order</button>
+                            <button class="add-to-cart ripple-effect glow-effect" data-id="2" data-name="Taro Milk Tea" data-price="150.00" data-image="taro-milktea.png">Add to Order</button>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Menu Item 3 -->
-                <div class="menu-item">
-                    <div class="menu-item-image" style="background-image: url('brown-sugar.png')">
+                <div class="menu-item tilt-effect animate-on-scroll">
+                    <div class="menu-item-image fade-in-image" style="background-image: url('brown-sugar.png')">
                         <div class="menu-item-name">Brown Sugar Boba</div>
                     </div>
                     <div class="menu-item-details">
                         <div class="menu-item-description">Fresh milk with caramelized brown sugar syrup and chewy tapioca pearls. A modern classic with irresistible flavor.</div>
                         <div class="menu-item-price">
                             ₱175
-                            <button class="add-to-cart" data-id="3" data-name="Brown Sugar Boba" data-price="175" data-image="https://images.unsplash.com/photo-1561027191-3a9a6d1a0e9b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80">Add to Order</button>
+                            <button class="add-to-cart ripple-effect glow-effect" data-id="3" data-name="Brown Sugar Boba" data-price="175" data-image="brown-sugar.png">Add to Order</button>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Menu Item 4 -->
-                <div class="menu-item">
-                    <div class="menu-item-image" style="background-image: url('matcha-milktea.png')">
+                <div class="menu-item tilt-effect animate-on-scroll">
+                    <div class="menu-item-image fade-in-image" style="background-image: url('matcha-milktea.jpg')">
                         <div class="menu-item-name">Matcha Milk Tea</div>
                     </div>
                     <div class="menu-item-details">
                         <div class="menu-item-description">Premium Japanese matcha powder blended with creamy milk. Earthy, slightly sweet, and packed with antioxidants.</div>
                         <div class="menu-item-price">
                             ₱175
-                            <button class="add-to-cart" data-id="4" data-name="Matcha Milk Tea" data-price="175" data-image="https://images.unsplash.com/photo-1561047037-7c12dbc4e93d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80">Add to Order</button>
+                            <button class="add-to-cart ripple-effect glow-effect" data-id="4" data-name="Matcha Milk Tea" data-price="175" data-image="matcha-milktea.jpg">Add to Order</button>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Menu Item 5 -->
-                <div class="menu-item">
-                    <div class="menu-item-image" style="background-image: url('thai-milktea.png')">
+                <div class="menu-item tilt-effect animate-on-scroll">
+                    <div class="menu-item-image fade-in-image" style="background-image: url('thai-milktea.webp')">
                         <div class="menu-item-name">Thai Milk Tea</div>
                     </div>
                     <div class="menu-item-details">
                         <div class="menu-item-description">Traditional Thai tea with a rich, creamy texture and distinctive orange color. Spiced with star anise and tamarind.</div>
                         <div class="menu-item-price">
                             ₱165
-                            <button class="add-to-cart" data-id="5" data-name="Thai Milk Tea" data-price="165" data-image="https://images.unsplash.com/photo-1561047037-7c12dbc4e93d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80">Add to Order</button>
+                            <button class="add-to-cart ripple-effect glow-effect" data-id="5" data-name="Thai Milk Tea" data-price="165" data-image="thai-milktea.webp">Add to Order</button>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Menu Item 6 -->
-                <div class="menu-item">
-                    <div class="menu-item-image" style="background-image: url('strawberry-milktea.png')">
+                <div class="menu-item tilt-effect animate-on-scroll">
+                    <div class="menu-item-image fade-in-image" style="background-image: url('strawberry-milktea.jpg')">
                         <div class="menu-item-name">Strawberry Milk Tea</div>
                     </div>
                     <div class="menu-item-details">
                         <div class="menu-item-description">Sweet strawberry flavor combined with our creamy milk tea base. Made with real strawberry puree for authentic taste.</div>
                         <div class="menu-item-price">
                             ₱180
-                            <button class="add-to-cart" data-id="6" data-name="Strawberry Milk Tea" data-price="180" data-image="https://images.unsplash.com/photo-1561027191-7a9630a6d5e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80">Add to Order</button>
+                            <button class="add-to-cart ripple-effect glow-effect" data-id="6" data-name="Strawberry Milk Tea" data-price="180" data-image="strawberry-milktea.jpg">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add-ins Section -->
+        <section id="add-ins" class="slide-up animate-on-scroll">
+            <h2 class="animate-text animate-on-scroll">ADD-ON</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: #7d6e63;">Personalize your boba experience with our premium add-ins</p>
+            <div class="menu-container">
+                <!-- Add-in Item 1 -->
+                <div class="menu-item tilt-effect animate-on-scroll">
+                    <div class="menu-item-image fade-in-image" style="background-image: url('https://www.honestfoodtalks.com/wp-content/uploads/2024/03/Classic-milk-tea-topping-vs-brown-sugar-boba.jpg')">
+                        <div class="menu-item-name">Classic Tapioca Pearls</div>
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-description">Our signature chewy tapioca pearls, slow-cooked to perfection with brown sugar for that authentic boba experience.</div>
+                        <div class="menu-item-price">
+                            ₱30
+                            <button class="add-to-cart ripple-effect glow-effect" data-id="a1" data-name="Classic Tapioca Pearls" data-price="30" data-image="https://www.honestfoodtalks.com/wp-content/uploads/2024/03/Classic-milk-tea-topping-vs-brown-sugar-boba.jpg">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Add-in Item 2 -->
+                <div class="menu-item tilt-effect animate-on-scroll">
+                    <div class="menu-item-image fade-in-image" style="background-image: url('https://images.unsplash.com/photo-1541696490-8744a5dc0228?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')">
+                        <div class="menu-item-name">Popping Boba</div>
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-description">Fruit-flavored juice-filled bubbles that burst in your mouth. Available in mango, strawberry, and lychee flavors.</div>
+                        <div class="menu-item-price">
+                            ₱40
+                            <button class="add-to-cart ripple-effect glow-effect" data-id="a2" data-name="Popping Boba" data-price="40" data-image="https://images.unsplash.com/photo-1541696490-8744a5dc0228?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Add-in Item 3 -->
+                <div class="menu-item tilt-effect animate-on-scroll">
+                    <div class="menu-item-image fade-in-image" style="background-image: url('https://i.ytimg.com/vi/1_q8txKyg4E/maxresdefault.jpg')">
+                        <div class="menu-item-name">Pudding</div>
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-description">Silky smooth egg pudding that adds a creamy, custard-like texture to your drink. A perfect complement to any milk tea.</div>
+                        <div class="menu-item-price">
+                            ₱35
+                            <button class="add-to-cart ripple-effect glow-effect" data-id="a3" data-name="Pudding" data-price="35" data-image="https://i.ytimg.com/vi/1_q8txKyg4E/maxresdefault.jpg">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Add-in Item 4 -->
+                <div class="menu-item tilt-effect animate-on-scroll">
+                    <div class="menu-item-image fade-in-image" style="background-image: url('https://i.pinimg.com/736x/0d/a3/af/0da3af21a5628c1ebdd9923e652496ec.jpg')">
+                        <div class="menu-item-name">Cheese Foam</div>
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-description">Creamy, slightly salty cheese foam that creates a perfect contrast with the sweetness of your tea. A modern boba favorite.</div>
+                        <div class="menu-item-price">
+                            ₱45
+                            <button class="add-to-cart ripple-effect glow-effect" data-id="a4" data-name="Cheese Foam" data-price="45" data-image="https://i.pinimg.com/736x/0d/a3/af/0da3af21a5628c1ebdd9923e652496ec.jpg">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Snacks Section -->
+        <section id="snacks" class="slide-up animate-on-scroll">
+            <h2 class="animate-text animate-on-scroll">PASTRY</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: #7d6e63;">Complement your boba experience with our delicious snacks</p>
+            <div class="menu-container">
+                <!-- Snack Item 1 -->
+                <div class="menu-item tilt-effect animate-on-scroll">
+                    <div class="menu-item-image fade-in-image" style="background-image: url('https://lh3.googleusercontent.com/-o3sCsmlJ7Gc/VBZ6_effD2I/AAAAAAAEugY/anOXQcOD0TE/s800/hong-kong-egg-waffles-39a.jpg')">
+                        <div class="menu-item-name">Taiwanese Egg Puffs</div>
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-description">Crispy on the outside, fluffy on the inside. These traditional egg puffs are the perfect sweet treat to enjoy with your boba.</div>
+                        <div class="menu-item-price">
+                            ₱120
+                            <button class="add-to-cart ripple-effect glow-effect" data-id="s1" data-name="Taiwanese Egg Puffs" data-price="120" data-image="https://lh3.googleusercontent.com/-o3sCsmlJ7Gc/VBZ6_effD2I/AAAAAAAEugY/anOXQcOD0TE/s800/hong-kong-egg-waffles-39a.jpg">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Snack Item 2 -->
+                <div class="menu-item tilt-effect animate-on-scroll">
+                    <div class="menu-item-image fade-in-image" style="background-image: url('https://www.spatuladesserts.com/wp-content/uploads/2022/03/Matcha-cookies-3050623.1.1.jpg')">
+                        <div class="menu-item-name">Matcha Cookies</div>
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-description">Soft-baked cookies infused with premium Japanese matcha. A delightful balance of sweetness with the earthy notes of green tea.</div>
+                        <div class="menu-item-price">
+                            ₱85
+                            <button class="add-to-cart ripple-effect glow-effect" data-id="s2" data-name="Matcha Cookies" data-price="85" data-image="https://www.spatuladesserts.com/wp-content/uploads/2022/03/Matcha-cookies-3050623.1.1.jpg">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Snack Item 3 -->
+                <div class="menu-item tilt-effect animate-on-scroll">
+                    <div class="menu-item-image fade-in-image" style="background-image: url('https://www.kitchensanctuary.com/wp-content/uploads/2019/07/Gua-Bao-Buns-Pork-Belly-tall-FS-7272.webp')">
+                        <div class="menu-item-name">Pork Bao Buns</div>
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-description">Steamed fluffy buns filled with savory pork and vegetables. A satisfying savory option to balance your sweet boba drink.</div>
+                        <div class="menu-item-price">
+                            ₱150
+                            <button class="add-to-cart ripple-effect glow-effect" data-id="s3" data-name="Pork Bao Buns" data-price="150" data-image="https://www.kitchensanctuary.com/wp-content/uploads/2019/07/Gua-Bao-Buns-Pork-Belly-tall-FS-7272.webp">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Snack Item 4 -->
+                <div class="menu-item tilt-effect animate-on-scroll">
+                    <div class="menu-item-image fade-in-image" style="background-image: url('https://kirbiecravings.com/wp-content/uploads/2016/09/mochi-ice-cream-033.jpg')">
+                        <div class="menu-item-name">Mochi Ice Cream</div>
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-description">Chewy rice cake exterior with creamy ice cream inside. Available in mango, strawberry, matcha, and chocolate flavors.</div>
+                        <div class="menu-item-price">
+                            ₱95
+                            <button class="add-to-cart ripple-effect glow-effect" data-id="s4" data-name="Mochi Ice Cream" data-price="95" data-image="https://kirbiecravings.com/wp-content/uploads/2016/09/mochi-ice-cream-033.jpg">Add to Order</button>
                         </div>
                     </div>
                 </div>
@@ -1019,10 +1608,10 @@
         </section>
         
         <!-- Testimonials Section -->
-        <section id="testimonials" class="testimonials slide-up">
-            <h2>What Our Customers Say</h2>
+        <section id="testimonials" class="testimonials slide-up animate-on-scroll">
+            <h2 class="animate-text animate-on-scroll">FEEDBACKS</h2>
             <div class="testimonial-container">
-                <div class="testimonial">
+                <div class="testimonial shimmer-effect reveal-zoom animate-on-scroll">
                     <div class="testimonial-text">
                         The best milk tea I've ever had! The brown sugar boba is absolutely addictive. I come here at least twice a week.
                     </div>
@@ -1031,7 +1620,7 @@
                         Sarah M.
                     </div>
                 </div>
-                <div class="testimonial">
+                <div class="testimonial shimmer-effect reveal-zoom animate-on-scroll">
                     <div class="testimonial-text">
                         Authentic Taiwanese flavors that remind me of home. The taro milk tea is perfectly balanced - not too sweet with real taro taste.
                     </div>
@@ -1040,7 +1629,7 @@
                         Jason L.
                     </div>
                 </div>
-                <div class="testimonial">
+                <div class="testimonial shimmer-effect reveal-zoom animate-on-scroll">
                     <div class="testimonial-text">
                         I love that I can customize the sugar and ice levels. The matcha latte is my go-to drink - so creamy and full of flavor!
                     </div>
@@ -1059,32 +1648,449 @@
             <!-- Bubbles will be added dynamically with JavaScript -->
         </div>
         <div class="footer-content">
-            <div class="footer-logo">Mark's Boba Bonanza</div>
+            <div class="footer-logo">BOBA ROYALE</div>
             <div class="footer-tagline">Crafting Happiness, One Bubble at a Time</div>
             
             <div class="footer-links">
                 <a href="#about">About Us</a>
                 <a href="#menu">Menu</a>
+                <a href="#add-ins">Add-ins</a>
+                <a href="#snacks">Snacks</a>
                 <a href="#order">Order Now</a>
                 <a href="#">Locations</a>
-                <a href="#">Careers</a>
                 <a href="#">FAQ</a>
             </div>
             
             <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#" class="float-animation"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="float-animation"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="float-animation"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="float-animation"><i class="fab fa-tiktok"></i></a>
             </div>
             
             <div class="copyright">
-                © 2025 Mark's Boba Bonanza. All rights reserved.
+                © 2025 BOBA ROYALE. All rights reserved.
             </div>
         </div>
     </footer>
+
+    <!-- Order Confirmation Animation -->
+    <div class="order-confirmation" id="orderConfirmation">
+        <div class="confirmation-content">
+            <div class="confirmation-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2 class="confirmation-title">Order Placed Successfully!</h2>
+            <p class="confirmation-message">Thank you for your order. Your delicious boba tea is being prepared and will be delivered soon!</p>
+            <button class="confirmation-button" id="confirmationButton">Continue Shopping</button>
+            <!-- Boba pearl elements will be added dynamically -->
+        </div>
+    </div>
     
     <script>
+        // Create loading animation
+        function createLoadingAnimation() {
+            // Check if loading overlay already exists
+            if (document.querySelector('.loading-overlay')) return;
+            
+            // Create loading overlay
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.className = 'loading-overlay';
+            loadingOverlay.style.position = 'fixed';
+            loadingOverlay.style.top = '0';
+            loadingOverlay.style.left = '0';
+            loadingOverlay.style.width = '100%';
+            loadingOverlay.style.height = '100%';
+            loadingOverlay.style.backgroundColor = '#f9f3e9';
+            loadingOverlay.style.display = 'flex';
+            loadingOverlay.style.flexDirection = 'column';
+            loadingOverlay.style.alignItems = 'center';
+            loadingOverlay.style.justifyContent = 'center';
+            loadingOverlay.style.zIndex = '9999';
+            loadingOverlay.style.transition = 'opacity 0.5s ease';
+            
+            // Create loading animation
+            const loadingAnimation = document.createElement('div');
+            loadingAnimation.className = 'loading-animation';
+            loadingAnimation.style.width = '100px';
+            loadingAnimation.style.height = '100px';
+            loadingAnimation.style.position = 'relative';
+            loadingAnimation.style.marginBottom = '20px';
+            
+            // Create bubble tea cup
+            const cup = document.createElement('div');
+            cup.className = 'loading-cup';
+            cup.style.width = '60px';
+            cup.style.height = '80px';
+            cup.style.backgroundColor = '#8d6e63';
+            cup.style.borderRadius = '0 0 30px 30px';
+            cup.style.position = 'absolute';
+            cup.style.bottom = '0';
+            cup.style.left = '50%';
+            cup.style.transform = 'translateX(-50%)';
+            cup.style.overflow = 'hidden';
+            
+            // Create tea
+            const tea = document.createElement('div');
+            tea.className = 'loading-tea';
+            tea.style.width = '100%';
+            tea.style.height = '60%';
+            tea.style.backgroundColor = '#a1887f';
+            tea.style.position = 'absolute';
+            tea.style.bottom = '0';
+            tea.style.left = '0';
+            tea.style.animation = 'wave 2s infinite ease-in-out';
+            
+            // Create straw
+            const straw = document.createElement('div');
+            straw.className = 'loading-straw';
+            straw.style.width = '8px';
+            straw.style.height = '100px';
+            straw.style.backgroundColor = '#e57373';
+            straw.style.position = 'absolute';
+            straw.style.bottom = '0';
+            straw.style.left = '60%';
+            straw.style.transform = 'rotate(10deg)';
+            straw.style.transformOrigin = 'bottom center';
+            straw.style.zIndex = '1';
+            
+            // Create bubbles
+            for (let i = 0; i < 5; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'loading-bubble';
+                bubble.style.width = Math.random() * 10 + 5 + 'px';
+                bubble.style.height = bubble.style.width;
+                bubble.style.backgroundColor = '#3e2723';
+                bubble.style.borderRadius = '50%';
+                bubble.style.position = 'absolute';
+                bubble.style.bottom = Math.random() * 40 + 'px';
+                bubble.style.left = Math.random() * 40 + 10 + 'px';
+                bubble.style.animation = `rise ${Math.random() * 2 + 2}s infinite ease-in-out`;
+                bubble.style.animationDelay = Math.random() * 2 + 's';
+                
+                tea.appendChild(bubble);
+            }
+            
+            // Create loading text
+            const loadingText = document.createElement('div');
+            loadingText.className = 'loading-text';
+            loadingText.textContent = 'Loading Boba Bonanza...';
+            loadingText.style.fontFamily = 'Poppins, Arial, sans-serif';
+            loadingText.style.color = '#5d4037';
+            loadingText.style.fontSize = '18px';
+            loadingText.style.fontWeight = 'bold';
+            loadingText.style.animation = 'pulse 1.5s infinite ease-in-out';
+            
+            // Add CSS animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes rise {
+                    0% { transform: translateY(0); opacity: 0.7; }
+                    100% { transform: translateY(-40px); opacity: 0; }
+                }
+                
+                @keyframes wave {
+                    0%, 100% { transform: translateY(0) scaleY(1); }
+                    50% { transform: translateY(-5px) scaleY(1.05); }
+                }
+                
+                @keyframes pulse {
+                    0%, 100% { opacity: 1; }
+                    50% { opacity: 0.5; }
+                }
+            `;
+            
+            // Assemble loading animation
+            cup.appendChild(tea);
+            loadingAnimation.appendChild(cup);
+            loadingAnimation.appendChild(straw);
+            loadingOverlay.appendChild(loadingAnimation);
+            loadingOverlay.appendChild(loadingText);
+            document.head.appendChild(style);
+            document.body.appendChild(loadingOverlay);
+            
+            // Hide loading overlay when page is loaded
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    loadingOverlay.style.opacity = '0';
+                    setTimeout(() => {
+                        if (document.body.contains(loadingOverlay)) {
+                            document.body.removeChild(loadingOverlay);
+                        }
+                    }, 500);
+                }, 1500);
+            });
+        }
+
+        // Make sure loading animation is created immediately
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create loading animation
+            createLoadingAnimation();
+            
+            // Add click event listener for popping pearl effect
+            document.addEventListener('click', createClickPearl);
+            
+            function createClickPearl(e) {
+                const pearl = document.createElement('div');
+                pearl.className = 'click-pearl';
+                pearl.style.left = `${e.clientX}px`;
+                pearl.style.top = `${e.clientY}px`;
+                
+                // Random size variation
+                const size = Math.random() * 15 + 10;
+                pearl.style.width = `${size}px`;
+                pearl.style.height = `${size}px`;
+                
+                // Random color variation (different shades of brown)
+                const colors = ['#3e2723', '#4e342e', '#5d4037', '#6d4c41', '#8d6e63'];
+                pearl.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                document.body.appendChild(pearl);
+                
+                // Remove the element after animation completes
+                setTimeout(() => {
+                    document.body.removeChild(pearl);
+                }, 600);
+            }
+        });
+        
+        // Particle animation for background
+        class Particle {
+            constructor(canvas, options = {}) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.x = options.x || Math.random() * canvas.width;
+                this.y = options.y || Math.random() * canvas.height;
+                this.size = Math.random() * 5 + 1;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 - 1.5;
+                this.color = options.color || '#f9f3e9';
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.size > 0.2) this.size -= 0.01;
+                
+                // Bounce off edges
+                if (this.x < 0 || this.x > this.canvas.width) {
+                    this.speedX = -this.speedX;
+                }
+                
+                if (this.y < 0 || this.y > this.canvas.height) {
+                    this.speedY = -this.speedY;
+                }
+            }
+
+            draw() {
+                this.ctx.beginPath();
+                this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                this.ctx.fillStyle = this.color;
+                this.ctx.globalAlpha = this.opacity;
+                this.ctx.fill();
+                this.ctx.globalAlpha = 1;
+            }
+        }
+
+        function initParticles() {
+            const canvas = document.getElementById('particleCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particlesArray = [];
+            const numberOfParticles = Math.min(window.innerWidth / 10, 100);
+            
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle(canvas, {
+                    color: '#8d6e63'
+                }));
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                    particlesArray[i].draw();
+                }
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+        
+        // Create header decoration elements
+        function createHeaderDecoration() {
+            const headerDecoration = document.getElementById('headerDecoration');
+            
+            // Create tea splashes
+            for (let i = 0; i < 5; i++) {
+                const splash = document.createElement('div');
+                splash.className = 'tea-splash';
+                
+                // Random size
+                const size = Math.random() * 200 + 100;
+                splash.style.width = `${size}px`;
+                splash.style.height = `${size}px`;
+                
+                // Random position
+                splash.style.left = `${Math.random() * 100}%`;
+                splash.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation delay
+                splash.style.animationDelay = `${Math.random() * 8}s`;
+                
+                headerDecoration.appendChild(splash);
+            }
+            
+            // Create tea pearls
+            for (let i = 0; i < 20; i++) {
+                const pearl = document.createElement('div');
+                pearl.className = 'tea-pearl';
+                
+                // Random size
+                const size = Math.random() * 20 + 10;
+                pearl.style.width = `${size}px`;
+                pearl.style.height = `${size}px`;
+                
+                // Random position
+                pearl.style.left = `${Math.random() * 100}%`;
+                pearl.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation duration and delay
+                pearl.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                pearl.style.animationDelay = `${Math.random() * 5}s`;
+                
+                headerDecoration.appendChild(pearl);
+            }
+        }
+        
+        // Create bubble animation for header text
+        function createHeaderTextBubbles() {
+            const logoBubbles = document.getElementById('logoBubbles');
+            const taglineBubbles = document.getElementById('taglineBubbles');
+            
+            // Create bubbles for logo
+            for (let i = 0; i < 15; i++) {
+                createTextBubble(logoBubbles);
+            }
+            
+            // Create bubbles for tagline
+            for (let i = 0; i < 10; i++) {
+                createTextBubble(taglineBubbles);
+            }
+            
+            function createTextBubble(container) {
+                const bubble = document.createElement('div');
+                bubble.className = 'text-bubble';
+                
+                // Random size
+                const size = Math.random() * 6 + 4;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                // Random position
+                bubble.style.left = `${Math.random() * 100}%`;
+                bubble.style.bottom = '0';
+                
+                // Random animation delay
+                bubble.style.animationDelay = `${Math.random() * 2}s`;
+                
+                // Random horizontal movement
+                const xMove = Math.random() * 20 - 10;
+                bubble.style.setProperty('--x-move', `${xMove}px`);
+                
+                container.appendChild(bubble);
+            }
+        }
+        
+        // Scroll animations
+        function initScrollAnimations() {
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add a slight delay based on the element's position in the DOM
+                        const delay = Array.from(animatedElements).indexOf(entry.target) * 0.1;
+                        entry.target.style.transitionDelay = `${delay}s`;
+                        entry.target.classList.add('animated');
+                        
+                        // For text elements, add character-by-character animation
+                        if (entry.target.classList.contains('animate-text')) {
+                            animateText(entry.target);
+                        }
+                        
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Function to animate text character by character
+            function animateText(element) {
+                const text = element.textContent;
+                element.textContent = '';
+                element.style.opacity = 1;
+                
+                for (let i = 0; i < text.length; i++) {
+                    const span = document.createElement('span');
+                    span.textContent = text[i];
+                    span.style.opacity = 0;
+                    span.style.transition = 'opacity 0.1s ease';
+                    span.style.transitionDelay = `${i * 0.03}s`;
+                    element.appendChild(span);
+                    
+                    // Force reflow
+                    void span.offsetWidth;
+                    
+                    span.style.opacity = 1;
+                }
+            }
+        }
+        
+        // Menu item hover effects
+        function initMenuEffects() {
+            const menuItems = document.querySelectorAll('.menu-item');
+            
+            menuItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    const image = this.querySelector('.menu-item-image');
+                    const details = this.querySelector('.menu-item-details');
+                    
+                    image.style.transform = 'scale(1.05)';
+                    image.style.transition = 'transform 0.5s ease';
+                    
+                    details.style.backgroundColor = '#f9f3e9';
+                    details.style.transition = 'background-color 0.5s ease';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    const image = this.querySelector('.menu-item-image');
+                    const details = this.querySelector('.menu-item-details');
+                    
+                    image.style.transform = 'scale(1)';
+                    details.style.backgroundColor = 'white';
+                });
+            });
+        }
+        
         // Create bubbles for header
         function createBubbles(container, count) {
             for (let i = 0; i < count; i++) {
@@ -1114,6 +2120,50 @@
             
             createBubbles(headerBubbles, 15);
             createBubbles(footerBubbles, 10);
+            
+            // Create header decoration
+            createHeaderDecoration();
+            
+            // Create header text bubbles
+            createHeaderTextBubbles();
+            
+            // Initialize all animations
+            initParticles();
+            initScrollAnimations();
+            initMenuEffects();
+            
+            // Set menu item indices for staggered animations
+            document.querySelectorAll('.menu-item').forEach((item, index) => {
+                item.style.setProperty('--item-index', index);
+            });
+            
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Add parallax scrolling effect
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.pageYOffset;
+                
+                document.querySelectorAll('.parallax-section').forEach(section => {
+                    const speed = 0.5;
+                    section.style.backgroundPosition = `center ${scrollPosition * speed}px`;
+                });
+            });
             
             // Cart variables
             let cart = [];
@@ -1168,24 +2218,35 @@
                 notification.style.position = 'fixed';
                 notification.style.bottom = '20px';
                 notification.style.left = '50%';
-                notification.style.transform = 'translateX(-50%)';
+                notification.style.transform = 'translateX(-50%) translateY(20px)';
                 notification.style.backgroundColor = '#8d6e63';
                 notification.style.color = 'white';
-                notification.style.padding = '10px 20px';
-                notification.style.borderRadius = '5px';
-                notification.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+                notification.style.padding = '12px 25px';
+                notification.style.borderRadius = '30px';
+                notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
                 notification.style.zIndex = '9999';
-                notification.textContent = message;
+                notification.style.opacity = '0';
+                notification.style.transition = 'all 0.3s ease';
+                
+                // Add icon
+                notification.innerHTML = `<i class="fas fa-shopping-cart" style="margin-right: 10px;"></i> ${message}`;
                 
                 document.body.appendChild(notification);
                 
+                // Animate in
+                setTimeout(() => {
+                    notification.style.opacity = '1';
+                    notification.style.transform = 'translateX(-50%) translateY(0)';
+                }, 10);
+                
+                // Animate out
                 setTimeout(() => {
                     notification.style.opacity = '0';
-                    notification.style.transition = 'opacity 0.5s ease';
+                    notification.style.transform = 'translateX(-50%) translateY(20px)';
                     setTimeout(() => {
                         document.body.removeChild(notification);
-                    }, 500);
-                }, 2000);
+                    }, 300);
+                }, 3000);
             }
             
             // Update cart
@@ -1349,14 +2410,11 @@
                     return;
                 }
                 
-                // Process order (in a real app, this would send data to a server)
-                showNotification('Order placed successfully!');
-                
-                // Close modal and clear cart
+                // Close modal
                 checkoutModal.classList.remove('open');
-                cart = [];
-                updateCart();
-                cartPanel.classList.remove('open');
+                
+                // Show order confirmation animation
+                showOrderConfirmation();
                 
                 // Reset form
                 checkoutForm.reset();
@@ -1364,6 +2422,60 @@
                 // Reset payment method selection
                 paymentMethods.forEach(m => m.classList.remove('selected'));
             });
+
+            // Updated function to show boba pearls instead of confetti
+            function showOrderConfirmation() {
+                const orderConfirmation = document.getElementById('orderConfirmation');
+                const confirmationContent = orderConfirmation.querySelector('.confirmation-content');
+                const confirmationButton = document.getElementById('confirmationButton');
+                
+                // Create boba pearls
+                for (let i = 0; i < 30; i++) {
+                    const pearl = document.createElement('div');
+                    pearl.className = 'boba-pearl';
+                    
+                    // Random position
+                    pearl.style.left = `${Math.random() * 100}%`;
+                    pearl.style.top = '0';
+                    
+                    // Random size
+                    const size = Math.random() * 10 + 8;
+                    pearl.style.width = `${size}px`;
+                    pearl.style.height = `${size}px`;
+                    
+                    // Random color (different shades of brown for boba)
+                    const colors = ['#3e2723', '#4e342e', '#5d4037', '#6d4c41'];
+                    pearl.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    // Random animation duration and delay
+                    pearl.style.animationDuration = `${Math.random() * 2 + 1.5}s`;
+                    pearl.style.animationDelay = `${Math.random() * 0.5}s`;
+                    
+                    // Add slight horizontal movement
+                    pearl.style.setProperty('--x-move', `${Math.random() * 100 - 50}px`);
+                    
+                    confirmationContent.appendChild(pearl);
+                }
+                
+                // Show confirmation
+                orderConfirmation.classList.add('show');
+                
+                // Handle button click
+                confirmationButton.addEventListener('click', function() {
+                    orderConfirmation.classList.remove('show');
+                    
+                    // Clear cart after confirmation is closed
+                    cart = [];
+                    updateCart();
+                    cartPanel.classList.remove('open');
+                    
+                    // Remove pearl elements after animation
+                    setTimeout(() => {
+                        const pearlElements = confirmationContent.querySelectorAll('.boba-pearl');
+                        pearlElements.forEach(el => el.remove());
+                    }, 500);
+                });
+            }
             
             // Close modal when clicking outside
             checkoutModal.addEventListener('click', function(e) {
@@ -1375,6 +2487,7 @@
             // Initialize cart
             updateCart();
         });
+        
     </script>
 </body>
 </html>
